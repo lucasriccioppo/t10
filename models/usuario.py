@@ -9,5 +9,3 @@ user_table = Table( 'usuarios', metadata,
                     Column('password', String),
                     Column('created_at', DateTime, default=datetime.now),
                     Column('updated_at', DateTime, default=datetime.now, onupdate=datetime.now))
-
-metadata.create_all()

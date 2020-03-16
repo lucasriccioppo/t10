@@ -8,9 +8,12 @@
 # -------------------------------------------------------
 
 from fastapi import FastAPI
+from models.models import *
+from database import metadata
+
+metadata.create_all()
 
 app = FastAPI()
-
 
 @app.get("/")
 def read_root():

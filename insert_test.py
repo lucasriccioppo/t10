@@ -1,4 +1,4 @@
-from models/usuario import user_table
+from models.usuario import user_table
 from database import engine
 
 conn = engine.connect()
