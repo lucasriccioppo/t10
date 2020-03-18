@@ -15,7 +15,7 @@ metadata.create_all()
 
 app = FastAPI()
 
-@app.get("/")
+@app.get("/user/create")
 def read_root():
     return {"Hello": "World"}
 
