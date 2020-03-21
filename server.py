@@ -4,6 +4,7 @@
 # docker start t10
 # docker exec -it t10 bash
 # psql -U postgres
+# CREATE DATABASE t10db;
 
 # -------------------------------------------------------
 
