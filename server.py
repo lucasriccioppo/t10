@@ -5,22 +5,18 @@
 # docker exec -it t10 bash
 # psql -U postgres
 # CREATE DATABASE t10db;
-
+# \c t10db -> connect to db
 # -------------------------------------------------------
 
 from fastapi import FastAPI
 from models.models import *
 from database import metadata
+from controllers import usuario_controller
 
 metadata.create_all()
 
 app = FastAPI()
 
-@app.get("/user/create")
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+@app.post("/usuario/")
+def create_item(usuario: Usuario):
+    return usuario_controller.create_user(usuario)

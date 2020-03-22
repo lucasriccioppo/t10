@@ -1,17 +1,18 @@
-from ..models.usuario import user_table
+from models.usuario import user_table
 from database import engine
 
 conn = engine.connect()
 
-def create_user(user, level_usuario):
+def create_user(usuario):
     ins = user_table.insert()
 
-    new_user = ins.values(  name = user.name,
-                            age = user.age,
-                            password = user.password,
-                            grupo_usuario = level_usuario)
-                        
+    new_user = ins.values(  name = usuario.name,
+                            age = usuario.age,
+                            password = usuario.password,
+                            grupo_usuario = usuario.grupo_usuario)
+    
     conn.execute(new_user)
+    return "usuario criado!"
 
 # def find_users():
 
