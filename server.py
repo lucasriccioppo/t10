@@ -1,4 +1,4 @@
-# hypercorn uvicorn main:app --reload
+# uvicorn main:app --reload
 # docker run --name t10 -e POSTGRES_PASSWORD=123 -d -p 5432:5432 postgres
 # ou
 # docker start t10
@@ -11,14 +11,14 @@
 from fastapi import FastAPI
 from models.models import *
 from database import metadata
-from controllers import usuario_controller
+from controllers import usuario_controller, produto_controller
 
 metadata.create_all()
 
 app = FastAPI()
 
 # Usuario
-@app.post("/usuario/")
+@app.post("/usuario/", status_code=201)
 def create_usuario(usuario: Usuario):
     return usuario_controller.create_user(usuario)
 
@@ -33,3 +33,24 @@ def find_usuario_by_id(usuario_id: int):
 @app.post("/usuario/login/")
 def login(data: UsuarioLogin):
     return usuario_controller.login(data)
+
+#Produtos
+@app.post("/produto/", status_code=201)
+def create_produto(produto: Produto):
+    return produto_controller.create_produto(produto)
+
+@app.get("/produto/")
+def find_produtos():
+    return produto_controller.find_produtos()
+
+@app.get("/produto/{produto_id}")
+def find_produto_by_id(produto_id: int):
+    return produto_controller.find_produto_by_id(produto_id)
+
+@app.get("/produto/{codigo}")
+def find_produto_by_codigo(codigo: int):
+    return produto_controller.find_produto_by_codigo(codigo)
+
+@app.delete("/produto/{id}")
+def delete_produto_by_id(id: int):
+    return produto_controller.delete_produto_by_id(id)

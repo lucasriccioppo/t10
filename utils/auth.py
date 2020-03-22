@@ -6,11 +6,11 @@ key = 'NfHfP9Fd8K-_-bqdMf2LUm0rdnh2-enbC6Qm1h26xVWVUMTxadMsK3_KAoMLq5GoI0DG9ICB6
 def hash_password(password):
     return bcrypt.hashpw(bytes(password, encoding='utf-8'), bcrypt.gensalt())
 
-def check_password(password):
-    return bcrypt.checkpw(password, hash_password(password))
+def check_password(password, hashedPassword):
+    return bcrypt.checkpw(bytes(password, encoding='utf-8'), hashedPassword)
 
-def get_token(usuario, acesso):
-    return jwt.encode({'usuario': usuario, 'acesso': acesso}, key, algorithm='HS256')
+def get_token(usuario):
+    return jwt.encode({'usuario': usuario}, key, algorithm='HS256')
 
 def decode(encrypted):
     return jwt.decode(encrypted, key, algorithms='HS256')

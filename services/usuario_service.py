@@ -1,6 +1,6 @@
 from models.usuario import user_table
 from database import engine
-from sqlalchemy import select
+from sqlalchemy.sql import select
 from utils import auth
 
 conn = engine.connect()
@@ -22,7 +22,7 @@ def find_by_email(email):
         user_table.c.email == email
     )
     query = conn.execute(s)
-    result = query.fetchone
+    result = query.fetchone()
     query.close()
     return result
 
@@ -38,16 +38,7 @@ def find_by_id(id):
         user_table.c.id == id
     )
     query = conn.execute(s)
-    result = query.fetchone
+    result = query.fetchone()
     query.close()
     return result
-
-
-"""
-def delete_user(id):
-    delete = user_table.delete().where(
-        usuarios.id == id
-    )
-
-    conn.execute(delete)"""
 
