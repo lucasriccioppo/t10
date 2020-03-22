@@ -17,6 +17,19 @@ metadata.create_all()
 
 app = FastAPI()
 
+# Usuario
 @app.post("/usuario/")
-def create_item(usuario: Usuario):
+def create_usuario(usuario: Usuario):
     return usuario_controller.create_user(usuario)
+
+@app.get("/usuario/")
+def find_usuarios():
+    return usuario_controller.find_usuarios()
+    
+@app.get("/usuario/{usuario_id}")
+def find_usuario_by_id(usuario_id: int):
+    return usuario_controller.find_user_by_id(usuario_id)
+
+@app.post("/usuario/login/")
+def login(data: UsuarioLogin):
+    return usuario_controller.login(data)
