@@ -10,8 +10,7 @@ user_table = Table( 'usuarios', metadata,
                     Column('age', Integer, nullable=False),
                     Column('email', String(60), nullable=False),
                     Column('password', LargeBinary),
-                   # Column('grupo_usuario', ForeignKey('grupo_usuario.id')),
-                    Column('grupo_usuario', Integer),
+                    Column('grupo_usuario', ForeignKey('grupo_usuario.id')),
                     Column('created_at', DateTime, default=datetime.now),
                     Column('updated_at', DateTime, default=datetime.now, onupdate=datetime.now))
 
@@ -20,7 +19,7 @@ class Usuario(BaseModel):
     age: int
     email: str
     password: str
-    grupo_usuario: int
+    grupo_usuario: str
 
 class UsuarioLogin(BaseModel):
     email: str

@@ -12,6 +12,7 @@ from fastapi import FastAPI
 from models.models import *
 from database import metadata
 from controllers import usuario_controller, produto_controller
+from utils import create_grupos_usuario
 
 metadata.create_all()
 
@@ -35,22 +36,22 @@ def login(data: UsuarioLogin):
     return usuario_controller.login(data)
 
 #Produtos
-@app.post("/produto/", status_code=201)
-def create_produto(produto: Produto):
-    return produto_controller.create_produto(produto)
+@app.post("/produto/{token}", status_code=201)
+def create_produto(produto: Produto, token):
+    return produto_controller.create_produto(produto, token)
 
-@app.get("/produto/")
+@app.get("/produto/{token}")
 def find_produtos():
-    return produto_controller.find_produtos()
+    return produto_controller.find_produtos(token)
 
-@app.get("/produto/{produto_id}")
-def find_produto_by_id(produto_id: int):
-    return produto_controller.find_produto_by_id(produto_id)
+@app.get("/produto/{produto_id}/{token}")
+def find_produto_by_id(produto_id: int, token):
+    return produto_controller.find_produto_by_id(produto_id, token)
 
-@app.get("/produto/{codigo}")
-def find_produto_by_codigo(codigo: int):
-    return produto_controller.find_produto_by_codigo(codigo)
+@app.get("/produto/codigo/{codigo}/{token}")
+def find_produto_by_codigo(codigo: int, token):
+    return produto_controller.find_produto_by_codigo(codigo, token)
 
-@app.delete("/produto/{id}")
-def delete_produto_by_id(id: int):
-    return produto_controller.delete_produto_by_id(id)
+@app.delete("/produto/{id}/{token}")
+def delete_produto_by_id(id: int, token):
+    return produto_controller.delete_produto_by_id(id, token)
