@@ -29,6 +29,12 @@ Criar o banco:
 ```bash
 make postgres
 ```
+ou, caso não crie o banco com o comando acima, use esta sequencia:
+```bash
+	docker exec -it t10 bash
+	psql -U postgres
+	CREATE DATABASE t10db;
+```
 
 Rodar o projeto:
 ```bash
