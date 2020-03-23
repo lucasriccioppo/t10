@@ -16,17 +16,21 @@ docker
 Rodar os seguintes comandos
 
 Instalar os pacotes necessários:
-```make requirements-install
+```bash
+make requirements-install
 ```
 
 Subir docker com imagem do postgres:
-```make create-db
+```bash
+make create-db
 ```
 
 Criar o banco:
-```make postgres
+```bash
+make postgres
 ```
 
 Rodar o projeto:
-```make run
+```bash
+make run
 ```
